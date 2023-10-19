@@ -22,3 +22,11 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+npm install -g @vue/cli
+sudo vue create vue-bootstrap-example
+cd vue-bootstrap-example
+sudo  npm i bootstrap-vue
+sudo chown -R mikhailisakov .
+sudo yarn serve

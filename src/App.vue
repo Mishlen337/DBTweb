@@ -1,17 +1,27 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <CommonLayout class="text-center">
+    <TheHeader/>
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App" overflow="auto"/> -->
+    <MainPage></MainPage>
+    <TheFooter/>
+
+  </CommonLayout>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+import TheHeader from './components/TheHeader.vue';
+import TheFooter from './components/TheFooter.vue';
+import MainPage from './components/MainPage.vue';
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    //HelloWorld,
+    MainPage,
+    TheHeader,
+    TheFooter
   }
 }
 </script>

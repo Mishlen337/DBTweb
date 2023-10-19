@@ -12,8 +12,7 @@
 // import HelloWorld from './components/HelloWorld.vue'
 import TheHeader from './components/TheHeader.vue';
 import TheFooter from './components/TheFooter.vue';
-import MainPage from './components/MainPage.vue';
-
+import MainPage from './components/MainPage/MainPage.vue';
 
 export default {
   name: 'App',

@@ -29,4 +29,5 @@ sudo vue create vue-bootstrap-example
 cd vue-bootstrap-example
 sudo  npm i bootstrap-vue
 sudo chown -R mikhailisakov .
+sudo vue add router
 sudo yarn serve

@@ -69,7 +69,9 @@ export default {
 }
 </script>
 <style scoped>
-/* .card-deck .card {
-    max-width: calc(25% - 30px);
-} */
+.card-group {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+}
 </style>

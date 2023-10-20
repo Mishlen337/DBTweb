@@ -11,17 +11,17 @@
                 <b-navbar-nav>
                     <b-nav-item to="/about">О нас</b-nav-item>
                     <b-nav-item to="/employees">Специалисты</b-nav-item>
-                    <b-nav-item href="#" disabled>Подбор</b-nav-item>
-                    <b-nav-item href="#" disabled>Блог</b-nav-item>
+                    <b-nav-item href="/choose">Подбор</b-nav-item>
+                    <b-nav-item href="/blog">Блог</b-nav-item>
                 </b-navbar-nav>
 
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item-dropdown right>
                         
                         <template #button-content>
-                            <em>Личный кабинет</em>
+                            <em>Мой профиль</em>
                         </template>
-                        <b-dropdown-item href="https://n269840.yclients.com/profile?o=">Войти</b-dropdown-item>
+                        <b-dropdown-item href="https://n269840.yclients.com/profile?o=">Личный кабинет</b-dropdown-item>
                         <b-dropdown-item href="https://n269840.yclients.com/profile/records?o=">Мои записи</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>

@@ -16,7 +16,7 @@
       </b-input-group-append>
     </b-input-group>
 
-    <div class="text-center" v-if="isButtonPushed">
+    <div v-if="isButtonPushed">
       
     <b-text>Вам нужен когнитивно-поведенческий терапевт</b-text>
     <b-card>

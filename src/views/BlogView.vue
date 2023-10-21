@@ -75,9 +75,9 @@ export default {
           title: "История DBT терапии",
           author: "Головаха Николай",
           description:
-            "Диалектическа поведенческая терапия (DBT) – создана Маршей Линехан во второй половине 20 века, для людей ...",
+            "Диалектическая поведенческая терапия (DBT) – создана Маршей Линехан во второй половине 20 века, для людей ...",
           imageSrc: require("@/assets/articles/article1.jpg"),
-          articleLink: "https://telegra.ph/Here-it-is-basic-history-10-20",
+          articleLink: "https://telegra.ph/Istoriya-DBT-terapii-10-21",
         },
         {
           title: "Биосоциальная модель ПРЛ",
@@ -85,7 +85,7 @@ export default {
           description:
             "Людям с ПРЛ сложно контролировать свои эмоции. Почему так происходит? Есть биологическая основа ...",
           imageSrc: require("@/assets/articles/article2.jpg"),
-          articleLink: "https://telegra.ph/Here-it-is-basic-history-10-20",
+          articleLink: "https://telegra.ph/Biosocialnaya-model-pogranichnogo-10-21",
         },
         {
           title: "Эмоциональная дисрегуляция при ПРЛ",
@@ -93,7 +93,7 @@ export default {
           description:
             "В ДБТ считается, что не умение регулировать сильные эмоции, приводит к проблемному поведению. Это такое поведение ...",
           imageSrc: require("@/assets/articles/article3.jpg"),
-          articleLink: "https://telegra.ph/Here-it-is-basic-history-10-20",
+          articleLink: "https://telegra.ph/EHmocionalnaya-disregulyaciya-pri-PRL-10-21",
         },
         {
           title: "Возможности ДБТ при лечении ПРЛ",
@@ -101,7 +101,7 @@ export default {
           description:
             "Мы не можем изменить повышенную врожденную эмоциональность. При этом, можно учиться регулировать свои эмоции с помощью  ...",
           imageSrc: require("@/assets/articles/article4.jpg"),
-          articleLink: "https://telegra.ph/Here-it-is-basic-history-10-20",
+          articleLink: "https://telegra.ph/Vozmozhnosti-DBT-pri-lechenii-PRL-10-21",
         },
       ],
     };

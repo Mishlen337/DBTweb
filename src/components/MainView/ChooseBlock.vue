@@ -14,9 +14,9 @@
         />
       </v-card>
     </div>
-        <div class="container">
-            <b-card style="background: #4BA0B5">
-                <b-button to="/choose" style="background: #A45029">Попробовать</b-button>
+        <div>
+            <b-card style="background: #A7C5C5">
+                <b-button to="/choose" style="background: #B96028">Попробовать</b-button>
             </b-card>
         </div>
   </card>

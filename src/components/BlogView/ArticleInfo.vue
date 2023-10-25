@@ -8,7 +8,7 @@
       {{ description }}
     </b-text>
     <div class="card-actions">
-      <b-button :href="articleLink">⚡️ Читать ⚡️</b-button>
+      <b-button :href="articleLink" style="background: #B96028">⚡️ Читать ⚡️</b-button>
     </div>
   </b-card>
 </template>

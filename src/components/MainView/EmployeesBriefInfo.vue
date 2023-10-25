@@ -6,7 +6,7 @@
                 Наши специалисты
         </b-card-title>
         <div class="container">
-            <b-carousel id="carousel-1" v-model="slide" :interval="4000" controls indicators background="#A45029"
+            <b-carousel id="carousel-1" v-model="slide" :interval="4000" controls indicators background="#B96028"
                 style="text-shadow: 1px 1px 2px #333;" @sliding-start="onSlideStart"
                 @sliding-end="onSlideEnd">
                 <b-carousel-slide>

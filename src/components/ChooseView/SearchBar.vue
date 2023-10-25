@@ -7,9 +7,9 @@
       <b-form-input></b-form-input>
       <b-input-group-append>
         <b-button
+          style="background: #B96028"
           size="lg"
           text="Поиск"
-          variant="success"
           @click="addNewElement"
           >Поиск</b-button
         >

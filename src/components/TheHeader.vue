@@ -1,8 +1,8 @@
 <template>
     <header>
-        <b-navbar toggleable="lg" type="dark" variant="info">
+        <b-navbar toggleable="lg" type="light" variant="light">
             <b-navbar-brand to="/">
-                <img src="../assets/logo.png" width="70px" >
+                <img class="rounded-img" src="../assets/logo.png" width="70px" >
             </b-navbar-brand>
 
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -36,3 +36,11 @@ export default {
     name: 'TheHeader'
 }
 </script>
+<style>
+.rounded-img {
+  border-radius: 50%; 
+}
+.navbar.navbar-light.bg-light{
+    background-color: #A7C5C5!important;
+ }
+</style>

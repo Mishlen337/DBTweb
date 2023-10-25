@@ -13,7 +13,7 @@
       bullets-outside
       prevent-y-scroll
       transition-speed="250"
-      slide-content-outside="top"
+      slide-content-outside="bottom"
       autoplay
       :slide-ratio="1 / 1"
       :dragging-distance="100"
@@ -21,7 +21,9 @@
       <vueper-slide
         v-for="em in employees" :key="em.fio"
         :title="em.fio"
+        :content="em.specialization.toString()"
         :image="em.imageSrc"
+        :link="em.appointmentLink"
       >
       </vueper-slide>
     </vueper-slides>

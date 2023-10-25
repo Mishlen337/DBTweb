@@ -18,7 +18,7 @@
             </li>
         </b-text>
         <div class="card-actions mw-100">
-            <b-button :href="appointmentLink">Запись на прием</b-button>
+            <b-button :href="appointmentLink" style="background: #B96028">Запись на прием</b-button>
         </div>
     </b-card>
 </template>

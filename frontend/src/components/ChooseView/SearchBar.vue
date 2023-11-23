@@ -17,7 +17,7 @@
     </b-input-group>
 
     <div v-if="employee">
-      <b-text>Вам нужен {{ specialization }}</b-text>
+      <b-text>Вам нужен {{ recommendedSpecialization }}</b-text>
       <b-card>
         <b-card-title>Рекомендованный специалист</b-card-title>
         <EmployeeInfo
@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       employee: null,
-      specialization: null
+      recommendedSpecialization: null
     };
   },
   methods: {
@@ -60,7 +60,7 @@ export default {
         })
         .then((response) => {
           this.employee = response.data.employee;
-          this.specialization = response.data.specialization
+          this.recommendedSpecialization = response.data.recommendedSpecialization;
         }
           )
         .catch((error) => console.log(error));

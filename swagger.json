@@ -1,0 +1,327 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {},
+        "title": "ДБТ",
+        "version": "1.0.0"
+    },
+    "host": "127.0.0.1",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/articles": {
+            "delete": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "id",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "token",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Статьи"
+                ],
+                "description": "Удаление статьи",
+                "operationId": "3",
+                "summary": "Удаление статьи"
+            },
+            "get": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Статьи"
+                ],
+                "description": "Просмотр статей",
+                "operationId": "",
+                "summary": "Просмотр статей"
+            },
+            "patch": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "articleLink",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "author",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "description",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "id",
+                        "type": "string"
+                    },
+                    {
+                        "format": "binary",
+                        "in": "formData",
+                        "name": "imageSrc",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "isPopular",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "title",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "token",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Статьи"
+                ],
+                "description": "Редактирование статьи",
+                "operationId": "2",
+                "summary": "Редактирование статьи"
+            },
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "articleLink",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "author",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "description",
+                        "type": "string"
+                    },
+                    {
+                        "format": "binary",
+                        "in": "formData",
+                        "name": "imageSrc",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "isPopular",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "title",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "token",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Статьи"
+                ],
+                "description": "Добавление статьи",
+                "operationId": "1",
+                "summary": "Добавление статьи"
+            }
+        },
+        "/diseases": {
+            "delete": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "id",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "token",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Заболевания"
+                ],
+                "description": "Удаление заболевания",
+                "operationId": "7",
+                "summary": "Удаление заболевания"
+            },
+            "get": {
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Заболевания"
+                ],
+                "description": "Просмотр заболеваний",
+                "operationId": "4",
+                "summary": "Просмотр заболеваний"
+            },
+            "patch": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "description",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "id",
+                        "type": "string"
+                    },
+                    {
+                        "format": "binary",
+                        "in": "formData",
+                        "name": "imageSrc",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "token",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Заболевания"
+                ],
+                "description": "Редактирование заболевания",
+                "operationId": "6",
+                "summary": "Редактирование заболевания"
+            },
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "description",
+                        "type": "string"
+                    },
+                    {
+                        "format": "binary",
+                        "in": "formData",
+                        "name": "imageSrc",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "token",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Заболевания"
+                ],
+                "description": "Добавление заболевания",
+                "operationId": "5",
+                "summary": "Добавление заболевания"
+            }
+        },
+        "/employees": {
+            "get": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Сотрудники"
+                ],
+                "description": "Просмотр сотрудников",
+                "operationId": "8",
+                "summary": "Просмотр сотрудников"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Статьи"
+        },
+        {
+            "name": "Заболевания"
+        },
+        {
+            "name": "Сотрудники"
+        }
+    ]
+}

@@ -1,0 +1,78 @@
+<template>
+  <div>
+    <b-card-text class="text-center">
+      Опишите свою проблему, а ИИ порекомендует специалиста
+    </b-card-text>
+    <b-input-group size="lg" class="mb-3">
+      <b-form-input id="ProblemText"></b-form-input>
+      <b-input-group-append>
+        <b-button
+          style="background: #b96028"
+          size="lg"
+          text="Поиск"
+          @click="getRecommendation"
+          >Поиск</b-button
+        >
+      </b-input-group-append>
+    </b-input-group>
+
+    <div v-if="employee">
+      <b-text>Вам нужен {{ specialization }}</b-text>
+      <b-card>
+        <b-card-title>Рекомендованный специалист</b-card-title>
+        <EmployeeInfo
+          :fio="employee.fio"
+          :specialization="employee.specialization"
+          :education="employee.education"
+          :imageSrc="employee.imageSrc"
+          :workExperience="employee.workExperience"
+          :appointmentLink="employee.appointmentLink"
+        >
+        </EmployeeInfo>
+      </b-card>
+    </div>
+  </div>
+</template>
+
+
+<script>
+import EmployeeInfo from "@/components/EmployeesView/EmployeeInfo.vue";
+import axios from "axios";
+
+export default {
+  name: "SearchBar",
+  components: {
+    EmployeeInfo,
+  },
+  data() {
+    return {
+      employee: null,
+      specialization: null
+    };
+  },
+  methods: {
+    getRecommendation() {
+      axios
+        .get("http://127.0.0.1:7777/recommendation", {
+          params: {
+            problem: document.getElementById("ProblemText").value,
+          },
+        })
+        .then((response) => {
+          this.employee = response.data.employee;
+          this.specialization = response.data.specialization
+        }
+          )
+        .catch((error) => console.log(error));
+    },
+  },
+};
+</script>
+
+<style scoped>
+.card {
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
+}
+</style>

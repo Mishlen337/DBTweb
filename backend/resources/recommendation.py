@@ -30,7 +30,7 @@ employee = {
     "appointmentLink": "https://n269840.yclients.com/company/262333/select-services?o=m772221",
     "is_popular": True,
 }
-specialization = "когнитивно-поведенческий терапевт"
+recommended_specialization = "когнитивно-поведенческий терапевт"
 
 class Recommendation(Resource):
     def get(self):
@@ -39,4 +39,4 @@ class Recommendation(Resource):
         data = parser.parse_args()
 
         logger.info(f"Problem: {data['problem']}")
-        return {"message": "ok", "employee": employee, "specialization": specialization}
+        return {"message": "ok", "employee": employee, "recommendedSpecialization": recommended_specialization}

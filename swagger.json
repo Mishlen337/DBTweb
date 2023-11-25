@@ -294,6 +294,34 @@
             }
         },
         "/employees": {
+            "delete": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "id",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "token",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Сотрудники"
+                ],
+                "description": "Удаления сотрудника",
+                "operationId": "9",
+                "summary": "Удаления сотрудника"
+            },
             "get": {
                 "consumes": [
                     "multipart/form-data"
@@ -310,6 +338,154 @@
                 "description": "Просмотр сотрудников",
                 "operationId": "8",
                 "summary": "Просмотр сотрудников"
+            },
+            "patch": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "appointmentLink",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "education",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "fio",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "id",
+                        "type": "string"
+                    },
+                    {
+                        "format": "binary",
+                        "in": "formData",
+                        "name": "imageSrc",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "isPopular",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "specialization",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "token",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "workExperience",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Сотрудники"
+                ],
+                "description": "Редактирование сотрудника",
+                "operationId": "11",
+                "summary": "Редактирование сотрудника"
+            },
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "appointmentLink",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "education",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "fio",
+                        "type": "string"
+                    },
+                    {
+                        "format": "binary",
+                        "in": "formData",
+                        "name": "imageSrc",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "isPopular",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "specialization",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "token",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "workExperience",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Сотрудники"
+                ],
+                "description": "Добавление сотрудника",
+                "operationId": "10",
+                "summary": "Добавление сотрудника"
+            }
+        },
+        "/recommendation": {
+            "get": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "problem",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Рекомендация"
+                ],
+                "description": "Получить рекомендацию",
+                "operationId": "12",
+                "summary": "Получить рекомендацию"
             }
         }
     },
@@ -322,6 +498,9 @@
         },
         {
             "name": "Сотрудники"
+        },
+        {
+            "name": "Рекомендация"
         }
     ]
 }

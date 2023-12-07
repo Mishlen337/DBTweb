@@ -13,4 +13,5 @@ RUN npm install
 COPY . /app
 
 EXPOSE 8080
-CMD yarn serve --host 0.0.0.0
+
+CMD yarn run build && yarn run serve --host 0.0.0.0

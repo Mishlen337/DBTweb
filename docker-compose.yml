@@ -68,12 +68,12 @@ services:
       - api
     restart: unless-stopped
 
-  # nginx_auth:
-  #   build: ./nginx
-  #   container_name: nginx_auth
-  #   restart: unless-stopped
-  #   env_file: .env
-  #   links:
-  #     - swagger-ui
-  #   ports:
-  #       - "4455:80"
+  nginx_auth:
+    build: ./nginx
+    container_name: nginx_auth
+    restart: unless-stopped
+    env_file: .env
+    links:
+      - frontend
+    ports:
+        - "80:80"

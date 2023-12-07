@@ -2,6 +2,8 @@ import base64
 from loguru import logger
 from flask_restful import Resource, reqparse
 
+from src.mongo import col_employees
+
 employee = {
     "id": 1,
     "fio": "Головаха Николай",
@@ -39,4 +41,9 @@ class Recommendation(Resource):
         data = parser.parse_args()
 
         logger.info(f"Problem: {data['problem']}")
+        try:
+            employee = dict(col_employees.find_one({}))
+            employee["_id"] = str(employee["_id"])
+        except TypeError:
+            return {"message": "no employees at all"}
         return {"message": "ok", "employee": employee, "recommendedSpecialization": recommended_specialization}

@@ -1,10 +1,11 @@
 import base64
-from flask_restful import Resource, reqparse, inputs
-from werkzeug.datastructures import FileStorage
-from datetime import datetime
 from copy import deepcopy
+from bson.objectid import ObjectId
+from werkzeug.datastructures import FileStorage
+from flask_restful import Resource, reqparse, inputs
 
 from config import token
+from src.mongo import col_employees
 
 employees = [
     {
@@ -94,7 +95,11 @@ employees = [
 
 class Employee(Resource):
     def get(self):
-        sorted_employees = sorted(deepcopy(employees), key=lambda x: x["fio"])
+        employees = list(col_employees.find({}))
+        sorted_employees = sorted(employees, key=lambda x: x["fio"])
+        for se in sorted_employees:
+            se["_id"] = str(se["_id"])
+
         return {"message": "ok", "employees": sorted_employees}
 
     def post(self):
@@ -116,34 +121,32 @@ class Employee(Resource):
         if data["token"] != token:
             return {"message": "Access is denied"}, 403
 
-        data["id"] = len(employees)
+        del data["token"]
         data["imageSrc"] = base64.b64encode(data["imageSrc"].read()).decode("utf-8")
 
-        # TODO Append data in bd
-        employees.append(data)
+        col_employees.insert_one(data)
         return {"message": "ок"}
 
     def delete(self):
         parser = reqparse.RequestParser()
         parser.add_argument("token", type=str, location="form", required=True)
-        parser.add_argument("id", type=int, location="form", required=True)
+        parser.add_argument("id", type=str, location="form", required=True)
         data = parser.parse_args()
 
         if data["token"] != token:
             return {"message": "Access is denied"}, 403
 
-        # TODO Remove data in bd
-        for ind, ar in enumerate(employees):
-            if ar["id"] == data["id"]:
-                employees.pop(ind)
-                return {"message": "ок"}
+        id = data.pop("id")
+        result = col_employees.delete_one({"_id": ObjectId(id)})
+        if result.deleted_count == 1:
+            return {"message": "ок"}
 
         return {"message": "No such employee"}, 404
 
     def patch(self):
         parser = reqparse.RequestParser()
         parser.add_argument("token", type=str, location="form", required=True)
-        parser.add_argument("id", type=int, location="form", required=True)
+        parser.add_argument("id", type=str, location="form", required=True)
         parser.add_argument("fio", type=str, location="form", required=False)
         parser.add_argument("specialization", type=str, action='append', location="form", required=False)
         parser.add_argument("education", type=str, action='append', location="form", required=False)
@@ -162,19 +165,19 @@ class Employee(Resource):
         if data["token"] != token:
             return {"message": "Access is denied"}, 403
 
-        # TODO Update data in bd
-        for ind, ar in enumerate(employees):
-            if ar["id"] == data["id"]:
-                # update fields
-                for field in patch_fields:
-                    if data[field]:
-                        employees[ind][field] = data[field]
+        del data["token"]
+        id = data.pop("id")
 
-                # update image
-                if data["imageSrc"]:
-                    employees[ind]["imageSrc"] = base64.b64encode(
-                        data["imageSrc"].read()
-                    ).decode("utf-8")
-                return {"message": "ок"}
+        update_data = {key: value for key, value in data.items() if value is not None}
+
+        # update image
+        if "imageSrc" in update_data:
+            data["imageSrc"] = base64.b64encode(
+                data["imageSrc"].read()
+            ).decode("utf-8")
+
+        result = col_employees.update_one({"_id": ObjectId(id)}, {"$set": update_data})
+        if result.matched_count == 1:
+            return {"message": "ок"}
 
         return {"message": "No such employee"}, 404

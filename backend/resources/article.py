@@ -1,11 +1,13 @@
 import base64
 from loguru import logger
-from flask_restful import Resource, reqparse, inputs
-from werkzeug.datastructures import FileStorage
 from copy import deepcopy
 from datetime import datetime
+from bson.objectid import ObjectId
+from flask_restful import Resource, reqparse, inputs
+from werkzeug.datastructures import FileStorage
 
 from config import token
+from src.mongo import col_articles
 
 
 articles = [
@@ -62,10 +64,10 @@ articles = [
 
 class Article(Resource):
     def get(self):
-        # TODO request from bd
-        sorted_articles = sorted(deepcopy(articles), key=lambda x: x["created"])
+        articles = list(col_articles.find({}))
+        sorted_articles = sorted(articles, key=lambda x: x["created"])
         for ar in sorted_articles:
-            logger.info(ar["created"])
+            ar["_id"] = str(ar["_id"])
             ar["created"] = ar["created"].isoformat()
         return {"message": "ok", "articles": sorted_articles}
 
@@ -87,35 +89,33 @@ class Article(Resource):
         if data["token"] != token:
             return {"message": "Access is denied"}, 403
 
-        data["id"] = len(articles)
+        del data["token"]
         data["imageSrc"] = base64.b64encode(data["imageSrc"].read()).decode("utf-8")
         data["created"] = datetime.now()
 
-        # TODO Append data in bd
-        articles.append(data)
+        col_articles.insert_one(data)
         return {"message": "ок"}
 
     def delete(self):
         parser = reqparse.RequestParser()
         parser.add_argument("token", type=str, location="form", required=True)
-        parser.add_argument("id", type=int, location="form", required=True)
+        parser.add_argument("id", type=str, location="form", required=True)
         data = parser.parse_args()
 
         if data["token"] != token:
             return {"message": "Access is denied"}, 403
 
-        # TODO Remove data in bd
-        for ind, ar in enumerate(articles):
-            if ar["id"] == data["id"]:
-                articles.pop(ind)
-                return {"message": "ок"}
+        id = data.pop("id")
+        result = col_articles.delete_one({"_id": ObjectId(id)})
+        if result.deleted_count == 1:
+            return {"message": "ок"}
 
         return {"message": "No such article"}, 404
 
     def patch(self):
         parser = reqparse.RequestParser()
         parser.add_argument("token", type=str, location="form", required=True)
-        parser.add_argument("id", type=int, location="form", required=True)
+        parser.add_argument("id", type=str, location="form", required=True)
         parser.add_argument("title", type=str, location="form", required=False)
         parser.add_argument("author", type=str, location="form", required=False)
         parser.add_argument("description", type=str, location="form", required=False)
@@ -128,24 +128,22 @@ class Article(Resource):
         )
         data = parser.parse_args()
 
-        patch_fields = ["title", "author", "description", "articleLink", "isPopular"]
-
         if data["token"] != token:
             return {"message": "Access is denied"}, 403
 
-        # TODO Update data in bd
-        for ind, ar in enumerate(articles):
-            if ar["id"] == data["id"]:
-                # update fields
-                for field in patch_fields:
-                    if data[field]:
-                        articles[ind][field] = data[field]
+        del data["token"]
+        id = data.pop("id")
 
-                # update image
-                if data["imageSrc"]:
-                    articles[ind]["imageSrc"] = base64.b64encode(
-                        data["imageSrc"].read()
-                    ).decode("utf-8")
-                return {"message": "ок"}
+        update_data = {key: value for key, value in data.items() if value is not None}
+
+        # update image
+        if "imageSrc" in update_data:
+            data["imageSrc"] = base64.b64encode(
+                data["imageSrc"].read()
+            ).decode("utf-8")
+
+        result = col_articles.update_one({"_id": ObjectId(id)}, {"$set": update_data})
+        if result.matched_count == 1:
+            return {"message": "ок"}
 
         return {"message": "No such article"}, 404

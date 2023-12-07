@@ -74,7 +74,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://127.0.0.1:7777/articles")
+      .get("/articles")
       .then((response) => (this.articles = response.data.articles))
       .catch((error) => console.log(error));
   },

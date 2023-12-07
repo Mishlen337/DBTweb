@@ -29,7 +29,7 @@ export default {
     },
     mounted() {
         axios
-        .get('http://127.0.0.1:7777/employees')
+        .get('/employees')
         .then(response => (this.employees = response.data.employees))
         .catch(error => console.log(error));
     },

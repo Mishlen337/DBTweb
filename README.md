@@ -1,24 +1,5 @@
 # Веб приложение для команды ДБТ специалистов
 
-## Frontend
-### setup
-```
-npm install -g @vue/cli
-```
-```
-sudo npm i bootstrap-vue
-```
-### launch
-```
-sudo yarn serve
-```
-
-## Backend
-### setup
-```
-pip install -r requirements.txt
-```
-### launch
-```
-python app.py
-```
+# Чтобы запустить проект, нужно: \
+1. Создать и заполнить файл .env (пример: .env.example)
+2. docker-compose up --build -d

@@ -53,7 +53,7 @@ export default {
   methods: {
     getRecommendation() {
       axios
-        .get("http://127.0.0.1:7777/recommendation", {
+        .get("/recommendation", {
           params: {
             problem: document.getElementById("ProblemText").value,
           },

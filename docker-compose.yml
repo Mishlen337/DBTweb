@@ -1,0 +1,79 @@
+version: "3"
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - api
+    ports:
+        - "8080:8080"
+
+  api:
+    build: ./backend
+    container_name: dbt_api
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - mongo
+    ports:
+        - "7777:7777"
+
+  mongo:
+    image: mongo
+    container_name: ${MONGO_HOST}
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 11943:27017
+    volumes:
+      - /opt/dbt_db/mongo:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 7886:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_AUTH_USERNAME}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_AUTH_PASSWORD}
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:27017/
+  
+
+  # swagger-ui:
+    # image: swaggerapi/swagger-ui
+    # container_name: "swagger-ui-container"
+    # ports:
+    #     - "8082:8080"
+    # volumes:
+    #     - ./swagger/swagger.json:/swagger.json
+    # environment:
+    #   SWAGGER_JSON: /swagger.json
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: "swagger-ui"
+    volumes:
+      - ./swagger:/usr/share/nginx/html/doc
+    environment:
+      API_URL: /doc/openapi.yaml
+    ports:
+      - "4455:8080"
+    links:
+      - api
+    restart: unless-stopped
+
+  # nginx_auth:
+  #   build: ./nginx
+  #   container_name: nginx_auth
+  #   restart: unless-stopped
+  #   env_file: .env
+  #   links:
+  #     - swagger-ui
+  #   ports:
+  #       - "4455:80"

@@ -1,0 +1,312 @@
+openapi: 3.0.1
+info:
+  title: ДБТ
+  contact: {}
+  version: 1.0.0
+servers:
+- url: http://127.0.0.1/
+tags:
+- name: Статьи
+- name: Заболевания
+- name: Сотрудники
+- name: Рекомендация
+paths:
+  /articles:
+    get:
+      tags:
+      - Статьи
+      summary: Просмотр статей
+      description: Просмотр статей
+      operationId: ""
+      responses:
+        "200":
+          description: ""
+          content: {}
+    post:
+      tags:
+      - Статьи
+      summary: Добавление статьи
+      description: Добавление статьи
+      operationId: "1"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                articleLink:
+                  type: string
+                author:
+                  type: string
+                description:
+                  type: string
+                imageSrc:
+                  type: string
+                  format: binary
+                isPopular:
+                  type: string
+                title:
+                  type: string
+                token:
+                  type: string
+      responses:
+        "200":
+          description: ""
+          content: {}
+    delete:
+      tags:
+      - Статьи
+      summary: Удаление статьи
+      description: Удаление статьи
+      operationId: "3"
+      parameters:
+      - name: ""
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                token:
+                  type: string
+      responses:
+        "200":
+          description: ""
+          content: {}
+    patch:
+      tags:
+      - Статьи
+      summary: Редактирование статьи
+      description: Редактирование статьи
+      operationId: "2"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                articleLink:
+                  type: string
+                author:
+                  type: string
+                description:
+                  type: string
+                id:
+                  type: string
+                imageSrc:
+                  type: string
+                  format: binary
+                isPopular:
+                  type: string
+                title:
+                  type: string
+                token:
+                  type: string
+      responses:
+        "200":
+          description: ""
+          content: {}
+  /diseases:
+    get:
+      tags:
+      - Заболевания
+      summary: Просмотр заболеваний
+      description: Просмотр заболеваний
+      operationId: "4"
+      responses:
+        "200":
+          description: ""
+          content: {}
+    post:
+      tags:
+      - Заболевания
+      summary: Добавление заболевания
+      description: Добавление заболевания
+      operationId: "5"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                imageSrc:
+                  type: string
+                  format: binary
+                token:
+                  type: string
+      responses:
+        "200":
+          description: ""
+          content: {}
+    delete:
+      tags:
+      - Заболевания
+      summary: Удаление заболевания
+      description: Удаление заболевания
+      operationId: "7"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                token:
+                  type: string
+      responses:
+        "200":
+          description: ""
+          content: {}
+    patch:
+      tags:
+      - Заболевания
+      summary: Редактирование заболевания
+      description: Редактирование заболевания
+      operationId: "6"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                id:
+                  type: string
+                imageSrc:
+                  type: string
+                  format: binary
+                token:
+                  type: string
+      responses:
+        "200":
+          description: ""
+          content: {}
+  /employees:
+    get:
+      tags:
+      - Сотрудники
+      summary: Просмотр сотрудников
+      description: Просмотр сотрудников
+      operationId: "8"
+      responses:
+        "200":
+          description: ""
+          content: {}
+    post:
+      tags:
+      - Сотрудники
+      summary: Добавление сотрудника
+      description: Добавление сотрудника
+      operationId: "10"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                appointmentLink:
+                  type: string
+                education:
+                  type: string
+                fio:
+                  type: string
+                imageSrc:
+                  type: string
+                  format: binary
+                isPopular:
+                  type: string
+                specialization:
+                  type: string
+                token:
+                  type: string
+                workExperience:
+                  type: string
+      responses:
+        "200":
+          description: ""
+          content: {}
+    delete:
+      tags:
+      - Сотрудники
+      summary: Удаления сотрудника
+      description: Удаления сотрудника
+      operationId: "9"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                token:
+                  type: string
+      responses:
+        "200":
+          description: ""
+          content: {}
+    patch:
+      tags:
+      - Сотрудники
+      summary: Редактирование сотрудника
+      description: Редактирование сотрудника
+      operationId: "11"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                appointmentLink:
+                  type: string
+                education:
+                  type: string
+                fio:
+                  type: string
+                id:
+                  type: string
+                imageSrc:
+                  type: string
+                  format: binary
+                isPopular:
+                  type: string
+                specialization:
+                  type: string
+                token:
+                  type: string
+                workExperience:
+                  type: string
+      responses:
+        "200":
+          description: ""
+          content: {}
+  /recommendation:
+    get:
+      tags:
+      - Рекомендация
+      summary: Получить рекомендацию
+      description: Получить рекомендацию
+      operationId: "12"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                problem:
+                  type: string
+      responses:
+        "200":
+          description: ""
+          content: {}
+components: {}
+x-original-swagger-version: "2.0"

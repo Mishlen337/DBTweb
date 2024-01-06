@@ -20,4 +20,4 @@ api.add_resource(Disease, "/diseases")
 api.add_resource(Recommendation, "/recommendation")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=7777, debug=True)
+    app.run(host="0.0.0.0", port=6666, debug=True)

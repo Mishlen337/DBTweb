@@ -19,7 +19,7 @@ services:
     depends_on:
       - mongo
     ports:
-        - "6666:6666"
+        - "7777:7777"
 
   mongo:
     image: mongo
@@ -68,12 +68,12 @@ services:
       - api
     restart: unless-stopped
 
-  # nginx_auth:
-  #   build: ./nginx
-  #   container_name: nginx_auth
-  #   restart: unless-stopped
-  #   env_file: .env
-  #   links:
-  #     - frontend
-  #   ports:
-  #       - "80:80"
+  nginx_auth:
+    build: ./nginx
+    container_name: nginx_auth
+    restart: unless-stopped
+    env_file: .env
+    links:
+      - frontend
+    ports:
+        - "80:80"

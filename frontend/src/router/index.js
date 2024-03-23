@@ -5,7 +5,7 @@ import AboutView from '../views/AboutView.vue'
 import EmployeesView from '../views/EmployeesView'
 import BlogView from '../views/BlogView'
 import ChooseView from '../views/ChooseView'
-import ReportView from '../views/ReportView.vue'
+// import ReportView from '../views/ReportView.vue'
 
 Vue.use(VueRouter)
 
@@ -44,11 +44,11 @@ const routes = [
     name: 'choose',
     component: ChooseView
   },
-  {
-    path: '/report',
-    name: 'report',
-    component: ReportView
-  }
+  // {
+  //   path: '/report',
+  //   name: 'report',
+  //   component: ReportView
+  // }
 
 ]
 

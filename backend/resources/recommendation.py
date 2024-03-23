@@ -3,36 +3,24 @@ from loguru import logger
 from flask_restful import Resource, reqparse
 
 from src.mongo import col_employees
+from config import recommendation_pipe, translation_pipe
 
-employee = {
-    "id": 1,
-    "fio": "Головаха Николай",
-    "specialization": [
-        "К.М.Н.",
-        "психотерапевт",
-        "когнитивно-поведенческий терапевт",
-        "диалектико–поведенческий терапевт",
-    ],
-    "education": [
-        "1998 г. - Алтайский государственный медицинский университет по специальности лечебное дело",
-        "Ординатура по специальности психиатрия-наркология.",
-        "Кандидат медицинских наук.",
-        "Сертификат врача психотерапевта",
-        "Когнитивно-поведенческая терапия",
-        "Диалектическая поведенческая терапия в Behavioral Tech под руководством André Ivanoff, PhD",
-        "Участвовал в международных стажировках и конференциях по лечению ожирения, лечению расстройств пищевого поведения, помощи людям с суицидальным поведением и самоповреждениями",
-    ],
-    "workExperience": [
-        "Кандидат медицинских наук",
-        "Сертификат врача психотерапевта",
-    ],
-    "imageSrc": base64.b64encode(
-        open("./assets/employees/Golovaha.jpg", "rb").read()
-    ).decode("utf-8"),
-    "appointmentLink": "https://n269840.yclients.com/company/262333/select-services?o=m772221",
-    "is_popular": True,
-}
-recommended_specialization = "когнитивно-поведенческий терапевт"
+
+def choose_specialist(predicted_field, specialists_priorities, thresh=0.5):
+    field = predicted_field['label']
+    score = predicted_field['score']
+    if score < thresh:
+        return None
+    related_specialists = []
+    for spec in specialists_priorities:
+        if field in spec["priorities"].keys():
+            related_specialists.append((spec["employee"], spec["priorities"][field]))
+    sorted_related_specialists = sorted(related_specialists, key=lambda x: x[1])
+
+    if sorted_related_specialists:
+        return sorted_related_specialists[0][0]
+    return None
+
 
 class Recommendation(Resource):
     def get(self):
@@ -40,10 +28,19 @@ class Recommendation(Resource):
         parser.add_argument("problem", type=str, location="args", required=True)
         data = parser.parse_args()
 
-        logger.info(f"Problem: {data['problem']}")
+        eng_problem = translation_pipe(data["problem"])
+        recommended_area = recommendation_pipe(data["problem"])
+        # recommended_area = "depression"
         try:
-            employee = dict(col_employees.find_one({}))
-            employee["_id"] = str(employee["_id"])
+            employees = list(col_employees.find({}))
+            specialists_priorities = []
+            for em in employees:
+                if em["area"]:
+                    specialists_priorities.append({"employee": em, "priorities": [{ar: i} for i, ar in enumerate(em["area"])]})
+
+            employee = choose_specialist(recommended_area, specialists_priorities)
         except TypeError:
             return {"message": "no employees at all"}
-        return {"message": "ok", "employee": employee, "recommendedSpecialization": recommended_specialization}
+        if not employee:
+            return {"message": "no such employee for the problem"}
+        return {"message": "ok", "employee": employee, "recommendedSpecialization": recommended_area}

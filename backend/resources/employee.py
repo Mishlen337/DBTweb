@@ -7,6 +7,10 @@ from flask_restful import Resource, reqparse, inputs
 from config import token
 from src.mongo import col_employees
 
+
+area_classes = ['depression', 'anxiety', 'bipolar disorder', 'schizophrenia', 'PTSD', 'OCD', 'ADHD', 'autism', 'eating disorder', 'personality disorder', 'phobia']
+
+
 class Employee(Resource):
     def get(self):
         employees = list(col_employees.find({}))
@@ -21,6 +25,7 @@ class Employee(Resource):
         parser.add_argument("token", type=str, location="form", required=True)
         parser.add_argument("fio", type=str, location="form", required=True)
         parser.add_argument("specialization", type=str, action='append', location="form", required=True)
+        parser.add_argument("area", type=str, action='append', location="form", choices=area_classes, required=False)
         parser.add_argument("education", type=str, action='append', location="form", required=True)
         parser.add_argument("workExperience", type=str, action='append', location="form", required=True)
         parser.add_argument(
@@ -63,6 +68,7 @@ class Employee(Resource):
         parser.add_argument("id", type=str, location="form", required=True)
         parser.add_argument("fio", type=str, location="form", required=False)
         parser.add_argument("specialization", type=str, action='append', location="form", required=False)
+        parser.add_argument("area", type=str, action='append', location="form", choices=area_classes, required=False)
         parser.add_argument("education", type=str, action='append', location="form", required=False)
         parser.add_argument("workExperience", type=str, action='append', location="form", required=False)
         parser.add_argument(
@@ -74,7 +80,7 @@ class Employee(Resource):
         )
         data = parser.parse_args()
 
-        patch_fields = ["fio", "specialization", "education", "workExperience", "appointmentLink", "isPopular"]
+        patch_fields = ["fio", "specialization", "area", "education", "workExperience", "appointmentLink", "isPopular"]
 
         if data["token"] != token:
             return {"message": "Access is denied"}, 403

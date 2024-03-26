@@ -23,15 +23,17 @@
       <b-text>Предположительно у вас: {{ recommendedSpecialization }}</b-text>
       <b-card>
         <b-card-title>Рекомендованный специалист</b-card-title>
-        <EmployeeInfo
-          :fio="employee.fio"
-          :specialization="employee.specialization"
-          :education="employee.education"
-          :imageSrc="employee.imageSrc"
-          :workExperience="employee.workExperience"
-          :appointmentLink="employee.appointmentLink"
-        >
-        </EmployeeInfo>
+        <div class="iconcontainer first"> 
+          <EmployeeInfo
+            :fio="employee.fio"
+            :specialization="employee.specialization"
+            :education="employee.education"
+            :imageSrc="employee.imageSrc"
+            :workExperience="employee.workExperience"
+            :appointmentLink="employee.appointmentLink"
+          >
+          </EmployeeInfo>
+        </div>
       </b-card>
     </div>
   </div>
@@ -91,5 +93,20 @@ export default {
   margin: 0 auto; /* Added */
   float: none; /* Added */
   margin-bottom: 10px; /* Added */
+}
+@media not (max-width: 600px) {
+.iconcontainer.first {
+    display: block;
+    width: 70%;
+    height: 100%;
+
+  }
+}
+@media not (max-width: 900px) {
+.iconcontainer.first {
+    display: block;
+    width: 50%;
+    height: 100%;
+  }
 }
 </style>

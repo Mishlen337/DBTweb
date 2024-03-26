@@ -5,3 +5,8 @@ pymongo
 requests
 loguru
 pymongo
+
+torch
+sentencepiece
+sacremoses
+transformers

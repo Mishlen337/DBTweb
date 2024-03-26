@@ -11,9 +11,7 @@
 <p align="center">
 	<!-- local repository, no metadata badges. -->
 <p>
-<p align="center">
-		<em>Developed with the software and tools below.</em>
-</p>
+
 <p align="center">
 	<img src="https://img.shields.io/badge/Python-3776AB.svg?style=default&logo=Python&logoColor=white" alt="Python">
     <img src="https://img.shields.io/badge/Python-3776AB.svg?style=default&logo=VUE&logoColor=white" alt="VUE">
@@ -22,20 +20,8 @@
 </p>
 <hr>
 
-##  Quick Links
 
-> - [ Overview](#-overview)
-> - [ Features](#-features)
-> - [ Architecture ](#-architecture)
->   - [ Installation](#-installation)
->   - [ Running ](#-running)
->   - [ Tests](#-tests)
-> - [ Contributing](#-contributing)
-> - [ License](#-license)
-
----
-
-##  Overview
+##  Описание
 
 <code>WEB приложение для специалистов диалектической поведенческой терапии. </code> \
 Основные возможности:
@@ -47,7 +33,7 @@
 
 ---
 
-##  Features
+##  Особенности
 
 1. бэкенд на основе Flask Api
 2. фронтенда на основе Vue JS
@@ -57,12 +43,12 @@
 6. использование трансформерных моделей для перевода и классификации текста
 ---
 
-##  Architecture
+##  Архитектура
 ![architecture](docs/images/architecture.png)
 Подробная документация разработчика для backend части: [backend/README.md](backend/README.md) \
 Подробная документация разработчика для frontend части: [frontend/README.md](frontend/README.md)
 
-###  Installation
+###  Установка
 
 1. Клонируйте репозиторий:
 
@@ -76,8 +62,12 @@ git clone https://github.com/Mishlen337/DBTweb
 cd DBTweb
 ```
 
-### Running
-3. Сбилдите и запустите контейнеры:
+### Запуск
+1. Создайте и заполните файл .env
+```sh
+vim .env
+```
+2. Сбилдите и запустите контейнеры:
 
 ```sh
 docker-compose up --build -d
@@ -87,7 +77,7 @@ docker-compose up --build -d
 
 ---
 
-##  Contributing
+##  Вклад
 
 - **[Submit Pull Requests](https://github.com/Mishlen337/DBTweb/pulls)**: Создавайте свои собственные Pull requests для внесения вклада в проект
 - **[Join the Discussions](https://github.com/Mishlen337/DBTweb/discussions)**: Делитесь своим мнением, предлагайте новое в обсуждении
@@ -95,7 +85,7 @@ docker-compose up --build -d
 
 ---
 
-##  License
+##  Лицензия
 
 Данный проект не защищен никакой лицензией, что позволяет использовать его в своих проектах.
 

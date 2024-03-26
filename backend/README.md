@@ -1,10 +1,10 @@
-##  Overview
+## Описание
 
 API реализован на основе фреймворка FLaskAPI, использует базу данных MongoDB и поднимается в Docker контенере, как один из микросервисов.
 
 ---
 
-##  Features
+##  Особенности
 
 Содержит следующие ресурсы для обеспечивания контентом фронтенд:
 1. Информация о cпециалистах: /employees
@@ -15,7 +15,7 @@ API реализован на основе фреймворка FLaskAPI, исп
 
 ---
 
-##  Repository Structure
+##  Структура файлов
 
 ```sh
 └── ./
@@ -35,9 +35,9 @@ API реализован на основе фреймворка FLaskAPI, исп
 
 ---
 
-##  Modules
+##  Описание модулей и файлов
 
-<details closed><summary>.</summary>
+<details open><summary>.</summary>
 
 | File                                 | Summary                         |
 | ---                                  | ---                             |
@@ -48,7 +48,7 @@ API реализован на основе фреймворка FLaskAPI, исп
 
 </details>
 
-<details closed><summary>resources</summary>
+<details open><summary>resources</summary>
 
 | File                                             | Summary                         |
 | ---                                              | ---                             |
@@ -60,7 +60,7 @@ API реализован на основе фреймворка FLaskAPI, исп
 
 </details>
 
-<details closed><summary>src</summary>
+<details open><summary>src</summary>
 
 | File                     | Summary                         |
 | ---                      | ---                             |

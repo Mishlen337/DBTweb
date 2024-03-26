@@ -34,7 +34,7 @@
       :dragging-distance="100"
     >
       <vueper-slide
-        v-for="em in popularEmployees" :key="em.fio"
+        v-for="em in this.employees" :key="em.fio"
         :title="em.fio"
         :content="em.specialization.toString()"
         :image="'data:image/gif;base64,'+ em.imageSrc"

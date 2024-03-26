@@ -22,25 +22,39 @@ def choose_specialist(predicted_field, specialists_priorities, thresh=0.5):
     return None
 
 
+eng_to_ru = {
+    'depression': 'депрессия', 
+    'anxiety': 'тревожность', 
+    'bipolar disorder': 'биполярное расстройство', 
+    'schizophrenia': 'шизофрения', 
+    'PTSD': 'ПТСР', 
+    'OCD': 'ОКР', 
+    'ADHD': 'СДВГ', 
+    'autism': 'аутизм', 
+    'eating disorder': 'расстройство пищевого поведения', 
+    'personality disorder': 'расстройство личности', 
+    'phobia': 'фобия'
+}
+
+
 class Recommendation(Resource):
     def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument("problem", type=str, location="args", required=True)
         data = parser.parse_args()
 
-        eng_problem = translation_pipe(data["problem"])
-        recommended_area = recommendation_pipe(data["problem"])
+        eng_problem = translation_pipe(data["problem"])[0]['translation_text']
+        recommended_area = recommendation_pipe(eng_problem)[0]
         # recommended_area = "depression"
-        try:
-            employees = list(col_employees.find({}))
-            specialists_priorities = []
-            for em in employees:
-                if em["area"]:
-                    specialists_priorities.append({"employee": em, "priorities": [{ar: i} for i, ar in enumerate(em["area"])]})
+        employees = list(col_employees.find({}))
+        specialists_priorities = []
+        for em in employees:
+            if em["area"]:
+                specialists_priorities.append({"employee": em, "priorities": {ar: i for i, ar in enumerate(em["area"])}})
 
-            employee = choose_specialist(recommended_area, specialists_priorities)
-        except TypeError:
-            return {"message": "no employees at all"}
+        employee = choose_specialist(recommended_area, specialists_priorities)
         if not employee:
-            return {"message": "no such employee for the problem"}
-        return {"message": "ok", "employee": employee, "recommendedSpecialization": recommended_area}
+            logger.info(f"no such employee for the area {recommended_area}")
+            return {"message": "no such employee for the problem"}, 404
+        employee["_id"] = str(employee["_id"])
+        return {"message": "ok", "employee": dict(employee), "recommendedSpecialization": eng_to_ru[recommended_area['label']]}

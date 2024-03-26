@@ -15,9 +15,12 @@
         >
       </b-input-group-append>
     </b-input-group>
-
+    
+    <div v-if="notFoundMessage">
+      <b-text>{{ notFoundMessage }}</b-text>
+    </div>
     <div v-if="employee">
-      <b-text>Вам нужен {{ recommendedSpecialization }}</b-text>
+      <b-text>Предположительно у вас: {{ recommendedSpecialization }}</b-text>
       <b-card>
         <b-card-title>Рекомендованный специалист</b-card-title>
         <EmployeeInfo
@@ -47,7 +50,8 @@ export default {
   data() {
     return {
       employee: null,
-      recommendedSpecialization: null
+      recommendedSpecialization: null,
+      notFoundMessage: null
     };
   },
   methods: {
@@ -61,9 +65,22 @@ export default {
         .then((response) => {
           this.employee = response.data.employee;
           this.recommendedSpecialization = response.data.recommendedSpecialization;
+          this.notFoundMessage = null
         }
           )
-        .catch((error) => console.log(error));
+          .catch((error) => {
+            // Check if the error response status is 404
+            if (error.response && error.response.status === 404) {
+              // Update the UI or state to show a custom message
+              this.notFoundMessage = 'Не можем найти подходящего специалиста, подберите его самостоятельно';
+              this.employee = null
+              this.recommendedSpecialization = null
+
+            } else {
+              // Handle other types of errors or log them
+              console.log(error);
+            }
+          });
     },
   },
 };

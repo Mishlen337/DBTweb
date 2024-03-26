@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 vue_setup_example
 .
+db_dump/

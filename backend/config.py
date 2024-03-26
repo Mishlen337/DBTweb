@@ -13,5 +13,5 @@ RESTORE_DIR = Path('db_dump/')
 
 token = os.getenv("TOKEN")
 
+translation_pipe = pipeline("translation", model="Helsinki-NLP/opus-mt-ru-en")
 recommendation_pipe = pipeline("text-classification", model="nebiyu29/fintunned-v2-roberta_GA", device='cpu')
-translation_pipe = pipeline("text-classification", model="nebiyu29/fintunned-v2-roberta_GA", device='cpu')
